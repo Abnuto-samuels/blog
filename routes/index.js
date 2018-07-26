@@ -51,10 +51,40 @@ router.get('/delete/:id', function(req,res,next){
   });
 });
 
-/* GET Create post. */
-router.get('/edit', function(req, res, next) {
-  res.render('edit');
+/ UPDATE ROUTES
+router.get('/edit/:id', function(req, res, next) {
+
+ //make a post request to our database
+ request({
+ url: "http://localhost:8000/posts/" + req.params.id,
+ method: "GET",
+ }, function(error, response, body) {
+     console.log(JSON.parse(body));
+     //send a response message
+     res.render('edit', {message: false, posts: JSON.parse(body)});
+ });
+
 });
+
+router.post('/edit/:id', function(req, res, next) {
+ request({
+   url: "http://localhost:8000/posts/" + req.params.id,
+ method: "PATCH",
+ form: {
+     title: req.body.title,
+     content: req.body.content,
+     author: req.body.author
+ }
+ }, function(error, response, body) {
+     // console.log(body);
+     //send a response message
+     res.render('edit', {message: 'Successfully Changed.', posts: JSON.parse(body)});
+ });
+});
+Message Input
+
+
+Message @Jarod Britz
 
 
 

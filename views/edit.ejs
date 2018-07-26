@@ -1,104 +1,98 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Create</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Post</title>
+    <link rel="stylesheet" href="../stylesheets/master.css">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-    <style media="screen">
-      body {
-        background-color: #F7F4EA;
-      }
-      .h1, .h2, .h3, h1, h2, h3 {
-        margin-top: -7px;
-        margin-bottom: 10px;
-      }
-      form {
-        width: 100%;
-      }
-      .navbar-inverse {
-          background-color: #80A1D4;
-      }
-      .navbar-inverse .navbar-nav>li>a {
-          color: white;
-      }
-      .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-          color: white;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
+    <link rel="stylesheet" href="../stylesheets/master.css">
+    <link rel="stylesheet" href="../stylesheets/new.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
-      <div class="row">
-        <nav class="navbar navbar-inverse col-lg-12">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="#"><h1>Weekly Sports</h1></a>
-            </div>
-            <ul class="nav navbar-nav">
-              <li><a href="/">Home</a></li>
-              <li><a href="/create">New post</a></li>
-              <li><a href="/archive">Archive</a></li>
-            </ul>
-          </div>
-        </nav>
-      </div>
+<body>
 
 
-        <div class="row">
-          <div class="jumbotron col-lg-12 image">
+    <nav>
+        <logo>
+            <img src="../images/logo.jpg" height="60">
+        </logo>
 
-          </div>
+        <ul>
+            <li>
+                <a href="/index">
+                    <i class="fa fa-home fa-fw"></i>Home</a>
+            </li>
+            <li>
+                <a href="/new">
+                    <i class="fa fa-pencil fa-fw"></i>New</a>
+            </li>
+            <li>
+                <a href="/contact">
+                    <i class="fa fa-phone fa-fw"></i>Contact</a>
+            </li>
+            <li>
+                <a href="/">
+                    <i class="fa fa-unlock-alt fa-fw"></i>Sign Out</a>
+            </li>
+        </ul>
+    </nav>
 
 
 
+    <div class="container formContainer">
+        <form method="post">
+        <div class="form-group col-xs-12 col-sm-6 col-sm-offset-3">
+            <label for="exampleInputName">Title</label>
+            <input type="text" class="form-control" id="exampleInputName" aria-describedby="heroName" placeholder="Enter title name..."
+                name="title" value="<%= posts.title %>">
+            <!-- <small id=heroName" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+        </div>
 
+        <div class="form-group col-xs-12 col-sm-6 col-sm-offset-3">
+            <label for="exampleInputName">Author</label>
+            <input type="text" class="form-control" id="exampleInputName" aria-describedby="heroName" placeholder="Name of author..."
+                name="author" value="<%= posts.author %>">
+            <!-- <small id=heroName" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+        </div>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">Create</div>
-      </div>
+        <div class="form-group col-xs-12 col-sm-6 col-sm-offset-3">
+            <label for="exampleInputName">Content</label>
+            <textarea id="summernote" name="content">
+                <%= posts.content %>
+            </textarea>
+            <script>
+                $(document).ready(function () {
+                    $('#summernote').summernote({
+                        height: 150
+                    });
+                });
+            </script>
 
-      <form action="/create" method="post">
-         <div class="form-group">
-           <label for="title">Title:</label>
-           <input type="text" class="form-control" name="title" id="title" placeholder="Name of blog">
-         </div>
-         <div class="form-group">
-           <label for="author">Author:</label>
-           <input type="text" class="form-control" name="author" id="author" placeholder="Name of Author">
-         </div>
-         <div class="form-group">
-           <label for="image">Image:</label>
-           <input type="text" class="form-control" name="image" id="image" placeholder="Image URL">
-         </div>
-         <div class="form-group">
-           <label for="date">Date:</label>
-           <input type="date" class="form-control" name="date" id="date" placeholder="Date">
-         </div>
-         <div>
-           <label for="summary">Summary of story:</label>
-            <textarea class="summernote" name="content"></textarea>
-         </div>
-         <div>
-           <label for="summernote">Full story:</label>
-            <textarea class="summernote" name="story"></textarea>
-         </div>
-         <button type="submit" class="btn btn-primary">Post</button>
-      </form>
+        </div>
 
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+            <button type="submit" class="btn btn-primary btn-block">Update post</button>
+        </div>
+
+    </form>
     </div>
 
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                height: 200
+            });
+        });
+    </script>
 
-     <script type="text/javascript">
-     $(document).ready(function() {
-        $('.summernote').summernote();
-      });
-     </script>
-  </body>
+</body>
+
 </html>
